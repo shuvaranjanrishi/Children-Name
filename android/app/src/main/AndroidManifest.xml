@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.therishideveloper.children_name">
    <application
-        android:label="children_name"
-        android:icon="@mipmap/ic_launcher">
+        android:label="শিশুদের সুন্দর নাম"
+        android:icon="@mipmap/app_logo">
         <activity
             android:exported="true"
             android:name=".MainActivity"
