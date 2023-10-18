@@ -8,108 +8,112 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var sWidth = MediaQuery.of(context).size.width;
     var sHeight = MediaQuery.of(context).size.height;
     debugPrint(sHeight.toString());
 
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                const CircleAvatar(
-                  radius: 55,
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: AssetImage(
-                    "assets/images/logo2.png",
-                  ),
-                ),
-                Column(children: [
-                  Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Text(
-                        MyStrings.appName,
-                        style: TextStyle(
-                            color: Colors.deepPurple,
-                            fontWeight: FontWeight.bold),
-                      )),
-                  Text(
-                    MyStrings.aboutText,
-                    style: TextStyle(fontWeight: FontWeight.normal),
-                  ),
-                ])
-              ],
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            child: Image(
+              alignment: Alignment.topCenter,
+              image: const AssetImage("assets/images/background_about2.jpg"),
+              width: sWidth,
+              height: sHeight,
+              fit: BoxFit.cover,
             ),
           ),
-          Stack(
-            children: <Widget>[
-              Positioned(
-                child: Image(
-                  alignment: Alignment.topCenter,
-                  image: const AssetImage("assets/images/background_about.jpg"),
-                  width: sWidth,
-                  height: sHeight * .20,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Positioned(
-                child: Container(
-                  width: sWidth,
-                  height: sHeight * .20,
-                  color: Colors.grey.shade400.withOpacity(.40),
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    ClipPath(
-                      clipper: MyDownClipper(),
-                      child: Container(
-                        height: sHeight * .18,
-                        width: sWidth * .40,
-                        color: Colors.orange,
-                        child: const Image(
-                          fit: BoxFit.fill,
-                          image: AssetImage(
-                            "assets/images/myphoto.jpg",
-                          ),
-                        ),
+                    const CircleAvatar(
+                      radius: 55,
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: AssetImage(
+                        "assets/images/logo2.png",
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: const Text("Developed By"),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        MyStrings.developerName,
+                    Column(children: [
+                      Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            MyStrings.appName,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )),
+                      Text(
+                        MyStrings.aboutText,
                         style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.deepPurple,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
+                            color: Colors.white, fontWeight: FontWeight.normal),
                       ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(5.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        MyStrings.developerContact,
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.deepPurple,
-                            fontWeight: FontWeight.w700),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                    ])
                   ],
                 ),
+              ),
+              Stack(
+                children: <Widget>[
+                  Positioned(
+                    child: Container(
+                      width: sWidth,
+                      height: sHeight * .20,
+                      color: Colors.grey.shade400.withOpacity(.40),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        ClipPath(
+                          clipper: MyDownClipper(),
+                          child: Container(
+                            height: sHeight * .18,
+                            width: sWidth * .40,
+                            color: Colors.orange,
+                            child: const Image(
+                              fit: BoxFit.fill,
+                              image: AssetImage(
+                                "assets/images/myphoto.jpg",
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          child: const Text("Developed By"),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            MyStrings.developerName,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(5.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            MyStrings.developerContact,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
