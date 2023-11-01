@@ -149,6 +149,7 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
               var fName = u.name!.toLowerCase();
               return fName.contains(searchText);
             }).toList();
+            _totalNames = _maleNameDisplay.length;
           });
         },
         // controller: _textController,
@@ -186,7 +187,7 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
                         backgroundColor: Colors.white54,
                         child: Image.asset("assets/images/icon_boy.png"),
                       ),
-                      title: Text(nameItem.name.toString()),
+                      title: Text(nameItem.name.toString()+" -- "+nameItem.nameEn.toString()),
                     );
                   },
                   body: Container(

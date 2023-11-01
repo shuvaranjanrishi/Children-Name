@@ -149,6 +149,7 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
               return fName.contains(searchText);
             }).toList();
           });
+          _totalNames = _femaleNameDisplay.length;
         },
         // controller: _textController,
         decoration: InputDecoration(
@@ -185,7 +186,7 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
                         backgroundColor: Colors.white54,
                         child: Image.asset("assets/images/icon_girl.png"),
                       ),
-                      title: Text(nameItem.name.toString()),
+                      title: Text(nameItem.name.toString()+" -- "+nameItem.nameEn.toString()),
                     );
                   },
                   body: Container(

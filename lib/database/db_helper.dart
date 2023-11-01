@@ -13,6 +13,7 @@ class DBHelper {
   static const femaleNameTable = "female_name";
   static const colId = "id";
   static const colName = "name";
+  static const colNameEn = "name_en";
   static const colMeaning = "meaning";
   static const colFavorite = "favorite";
 
