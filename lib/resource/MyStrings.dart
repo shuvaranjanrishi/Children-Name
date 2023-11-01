@@ -1,5 +1,4 @@
 class MyStrings {
-
   static String appName = "সনাতনী শিশুদের সুন্দর নাম";
 
   static String aboutText =
@@ -17,4 +16,18 @@ class MyStrings {
 
   static String developerContact =
       "Email: sr.rishi.nameapp2022@gmail.com\nFB: shuvaranjanrishi/facebook.com";
+
+  static String maleName = "ছেলেদের নাম";
+  static String femaleName = "মেয়েদের নাম";
+  static String searchMaleName = "ছেলেদের নাম অনুসন্ধান করুন";
+  static String searchFemaleName = "মেয়েদের নাম অনুসন্ধান করুন";
+  static String noNameFound = "কোন নাম পাওয়া যায়নি";
+
+  //drawer
+  static String home = "হোম";
+  static String krishnaName = "কৃষ্ণের শতনাম";
+  static String rashi = "নামের রাশি";
+  static String feedback = "আপনার পরামর্শ পাঠান";
+  static String rating = "রেটিং দিন";
+  static String appInfo = "অ্যাপের তথ্য";
 }

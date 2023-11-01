@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:children_name/component/my_clipper.dart';
 import 'package:children_name/database/db_helper.dart';
 import 'package:children_name/model/name_model.dart';
@@ -9,18 +7,20 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sqflite/sqflite.dart';
 
-class MaleNameScreen extends StatefulWidget {
-  const MaleNameScreen({Key? key}) : super(key: key);
+import 'about_screen.dart';
+
+class RashiScreen extends StatefulWidget {
+  const RashiScreen({Key? key}) : super(key: key);
 
   @override
-  _MaleNameScreenState createState() => _MaleNameScreenState();
+  _RashiScreenState createState() => _RashiScreenState();
 }
 
-class _MaleNameScreenState extends State<MaleNameScreen> {
+class _RashiScreenState extends State<RashiScreen> {
   final DBHelper _dbHelper = DBHelper.instance;
 
-  List<NameModel> _maleNames = [];
-  List<NameModel> _maleNameDisplay = [];
+  List<NameModel> _femaleNames = [];
+  List<NameModel> _femaleNameDisplay = [];
 
   int _totalNames = 0;
 
@@ -38,19 +38,26 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100),
-        child: _buildAppBar(),
-      ),
-      body: Column(
-        children: <Widget>[
-          _buildSearchBar(),
-          Expanded(
-            child: _buildListView(),
-          )
-        ],
-      ),
-    );
+        backgroundColor: _setBackgroundColor(),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(100),
+          child: _buildAppBar(),
+        ),
+        body: Column(
+          children: <Widget>[
+            if (!isAboutIsClicked) _buildSearchBar(),
+            Expanded(
+              child: isAboutIsClicked ? const AboutScreen() : _buildListView(),
+            )
+          ],
+        ));
+  }
+
+  Color _setBackgroundColor() {
+    if (isAboutIsClicked) {
+      return Colors.deepPurple.shade300.withOpacity(.40);
+    }
+    return Colors.white;
   }
 
   Widget _buildAppBar() {
@@ -61,7 +68,11 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
       leading: Container(
         margin: const EdgeInsets.only(left: 20, top: 10),
         child: IconButton(
-          icon: Icon(Icons.menu_outlined, color: Colors.white, size: 26),
+          icon: isAboutIsClicked
+              ? const Icon(Icons.assignment_ind_outlined,
+                  color: Colors.red, size: 26)
+              : const Icon(Icons.assignment_ind_outlined,
+                  color: Colors.white, size: 26),
           onPressed: () {
             setState(() {
               isAboutIsClicked = !isAboutIsClicked;
@@ -71,35 +82,45 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
       ),
       title: Container(
         margin: const EdgeInsets.only(top: 18.0),
-        child: Text(
-          MyStrings.maleName,
-          style: TextStyle(color: Colors.white, fontSize: 22),
-        ),
+        child: isAboutIsClicked
+            ? const Text(
+                "অ্যাপের তথ্য",
+                style: TextStyle(color: Colors.white, fontSize: 22),
+              )
+            : const Text(
+                "মেয়েদের নাম",
+                style: TextStyle(color: Colors.white, fontSize: 22),
+              ),
       ),
       actions: [
         Container(
           margin: const EdgeInsets.only(right: 20, top: 10),
-          child: IconButton(
-            onPressed: () {
-              setState(() {
-                updateListView();
-                isFavoriteIsClicked = !isFavoriteIsClicked;
-              });
-            },
-            icon: isFavoriteIsClicked
-                ? const Icon(Icons.favorite, color: Colors.red, size: 26)
-                : const Icon(Icons.favorite, color: Colors.white, size: 26),
-          ),
+          child: isAboutIsClicked
+              ? null
+              : IconButton(
+                  onPressed: () {
+                    setState(() {
+                      updateListView();
+                      isFavoriteIsClicked = !isFavoriteIsClicked;
+                    });
+                  },
+                  icon: isFavoriteIsClicked
+                      ? const Icon(Icons.favorite, color: Colors.red, size: 26)
+                      : const Icon(Icons.favorite,
+                          color: Colors.white, size: 26),
+                ),
         ),
       ],
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(20),
         child: Container(
           padding: const EdgeInsets.only(bottom: 25),
-          child: Text(
-            "মোট নাম: " + _totalNames.toString(),
-            style: const TextStyle(color: Colors.grey, fontSize: 16),
-          ),
+          child: isAboutIsClicked
+              ? const Text("")
+              : Text(
+                  "মোট নাম: " + _totalNames.toString(),
+                  style: const TextStyle(color: Colors.grey, fontSize: 16),
+                ),
         ),
       ),
       flexibleSpace: ClipPath(
@@ -116,83 +137,6 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
     );
   }
 
-  // Widget _buildAppBar() {
-  //   return AppBar(
-  //     centerTitle: true,
-  //     backgroundColor: Colors.transparent,
-  //     elevation: 0,
-  //     leading: Container(
-  //       margin: const EdgeInsets.only(left: 20, top: 10),
-  //       child: IconButton(
-  //         icon: isAboutIsClicked
-  //             ? const Icon(Icons.assignment_ind_outlined,
-  //                 color: Colors.red, size: 26)
-  //             : const Icon(Icons.assignment_ind_outlined,
-  //                 color: Colors.white, size: 26),
-  //         onPressed: () {
-  //           setState(() {
-  //             isAboutIsClicked = !isAboutIsClicked;
-  //           });
-  //         },
-  //       ),
-  //     ),
-  //     title: Container(
-  //       margin: const EdgeInsets.only(top: 18.0),
-  //       child: isAboutIsClicked
-  //           ? Text(
-  //               MyStrings.appInfo,
-  //               style: TextStyle(color: Colors.white, fontSize: 22),
-  //             )
-  //           : Text(
-  //               MyStrings.maleName,
-  //               style: TextStyle(color: Colors.white, fontSize: 22),
-  //             ),
-  //     ),
-  //     actions: [
-  //       Container(
-  //         margin: const EdgeInsets.only(right: 20, top: 10),
-  //         child: isAboutIsClicked
-  //             ? null
-  //             : IconButton(
-  //                 onPressed: () {
-  //                   setState(() {
-  //                     updateListView();
-  //                     isFavoriteIsClicked = !isFavoriteIsClicked;
-  //                   });
-  //                 },
-  //                 icon: isFavoriteIsClicked
-  //                     ? const Icon(Icons.favorite, color: Colors.red, size: 26)
-  //                     : const Icon(Icons.favorite,
-  //                         color: Colors.white, size: 26),
-  //               ),
-  //       ),
-  //     ],
-  //     bottom: PreferredSize(
-  //       preferredSize: const Size.fromHeight(20),
-  //       child: Container(
-  //         padding: const EdgeInsets.only(bottom: 25),
-  //         child: isAboutIsClicked
-  //             ? const Text("")
-  //             : Text(
-  //                 "মোট নাম: " + _totalNames.toString(),
-  //                 style: const TextStyle(color: Colors.grey, fontSize: 16),
-  //               ),
-  //       ),
-  //     ),
-  //     flexibleSpace: ClipPath(
-  //       clipper: MyDownClipper(),
-  //       child: Container(
-  //         decoration: const BoxDecoration(
-  //             gradient: LinearGradient(
-  //                 colors: [Colors.deepPurple, Color(0xff7D3C98)],
-  //                 begin: Alignment.topCenter,
-  //                 end: Alignment.bottomCenter,
-  //                 tileMode: TileMode.clamp)),
-  //       ),
-  //     ),
-  //   );
-  // }
-
   Widget _buildSearchBar() {
     return Padding(
       padding: const EdgeInsets.all(5.0),
@@ -201,12 +145,12 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
         onChanged: (searchText) {
           searchText = searchText.toLowerCase();
           setState(() {
-            _maleNameDisplay = _maleNames.where((u) {
+            _femaleNameDisplay = _femaleNames.where((u) {
               var fName = u.name!.toLowerCase();
               return fName.contains(searchText);
             }).toList();
-            _totalNames = _maleNameDisplay.length;
           });
+          _totalNames = _femaleNameDisplay.length;
         },
         // controller: _textController,
         decoration: InputDecoration(
@@ -215,18 +159,18 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
             borderRadius: BorderRadius.circular(20),
           ),
           prefixIcon: const Icon(Icons.search),
-          hintText: MyStrings.searchMaleName,
+          hintText: MyStrings.searchFemaleName,
         ),
       ),
     );
   }
 
   Widget _buildListView() {
-    if (_maleNameDisplay.isNotEmpty) {
+    if (_femaleNameDisplay.isNotEmpty) {
       return ListView.builder(
-        itemCount: _maleNameDisplay.length,
+        itemCount: _femaleNameDisplay.length,
         itemBuilder: (context, index) {
-          var nameItem = _maleNameDisplay[index];
+          var nameItem = _femaleNameDisplay[index];
           return Card(
             shape: RoundedRectangleBorder(
                 side: const BorderSide(color: Colors.deepPurple, width: 0.5),
@@ -241,7 +185,7 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
                     return ListTile(
                       leading: CircleAvatar(
                         backgroundColor: Colors.white54,
-                        child: Image.asset("assets/images/icon_boy.png"),
+                        child: Image.asset("assets/images/icon_girl.png"),
                       ),
                       title: Text(nameItem.name.toString() +
                           " -- " +
@@ -257,12 +201,12 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
                         onPressed: () {
                           if (nameItem.isFavorite == true) {
                             nameItem.isFavorite = false;
-                            _dbHelper.updateMaleName(nameItem);
+                            _dbHelper.updateFemaleName(nameItem);
                             showSnackBar(
                                 nameItem.name! + " is removed from favorite ");
                           } else {
                             nameItem.isFavorite = true;
-                            _dbHelper.updateMaleName(nameItem);
+                            _dbHelper.updateFemaleName(nameItem);
                             showSnackBar(
                                 nameItem.name! + " is added to favorite ");
                           }
@@ -276,19 +220,19 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
                       ),
                     ),
                   ),
-                  isExpanded: _maleNames[index].expanded,
+                  isExpanded: _femaleNames[index].expanded,
                 )
               ],
               expansionCallback: (int item, bool status) {
                 setState(() {
-                  _maleNames[index].expanded = !_maleNames[index].expanded;
+                  _femaleNames[index].expanded = !_femaleNames[index].expanded;
                 });
               },
             ),
           );
         },
       );
-    } else if (_maleNameDisplay.isEmpty) {
+    } else if (_femaleNameDisplay.isEmpty) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -323,37 +267,31 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
   void updateListView() {
     final Future<Database> dbFuture = _dbHelper.initDb();
     try {
-      dbFuture.then(
-        (database) {
-          if (isFavoriteIsClicked) {
-            Future<List<NameModel>> nameListFuture =
-                _dbHelper.getFavMaleNameList();
-            nameListFuture.then(
-              (newNameList) {
-                setState(
-                  () {
-                    _maleNames = newNameList;
-                    _maleNameDisplay = _maleNames;
-                    _totalNames = _maleNames.length;
-                    debugPrint("total data: " + _maleNames.length.toString());
-                  },
-                );
-              },
-            );
-          } else {
-            Future<List<NameModel>> nameListFuture =
-                _dbHelper.getMaleNameList();
-            nameListFuture.then((newNameList) {
-              setState(() {
-                _maleNames = newNameList;
-                _maleNameDisplay = _maleNames;
-                _totalNames = _maleNames.length;
-                debugPrint("total data: " + _maleNames.length.toString());
-              });
+      dbFuture.then((database) {
+        if (isFavoriteIsClicked) {
+          Future<List<NameModel>> nameListFuture =
+              _dbHelper.getFavFemaleNameList();
+          nameListFuture.then((newNameList) {
+            setState(() {
+              _femaleNames = newNameList;
+              _femaleNameDisplay = _femaleNames;
+              _totalNames = _femaleNames.length;
+              debugPrint("total data: " + _femaleNames.length.toString());
             });
-          }
-        },
-      );
+          });
+        } else {
+          Future<List<NameModel>> nameListFuture =
+              _dbHelper.getFemaleNameList();
+          nameListFuture.then((newNameList) {
+            setState(() {
+              _femaleNames = newNameList;
+              _femaleNameDisplay = _femaleNames;
+              _totalNames = _femaleNames.length;
+              debugPrint("total data: " + _femaleNames.length.toString());
+            });
+          });
+        }
+      });
     } on DatabaseException catch (e) {
       if (e.isUniqueConstraintError()) {
         Fluttertoast.showToast(

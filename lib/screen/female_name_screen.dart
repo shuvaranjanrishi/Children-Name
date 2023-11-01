@@ -1,12 +1,11 @@
 import 'package:children_name/component/my_clipper.dart';
 import 'package:children_name/database/db_helper.dart';
 import 'package:children_name/model/name_model.dart';
+import 'package:children_name/resource/MyStrings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sqflite/sqflite.dart';
-
-import 'about_screen.dart';
 
 class FemaleNameScreen extends StatefulWidget {
   const FemaleNameScreen({Key? key}) : super(key: key);
@@ -37,26 +36,18 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: _setBackgroundColor(),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: _buildAppBar(),
         ),
         body: Column(
           children: <Widget>[
-            if (!isAboutIsClicked) _buildSearchBar(),
+            _buildSearchBar(),
             Expanded(
-              child: isAboutIsClicked ? const AboutScreen() : _buildListView(),
+              child: _buildListView(),
             )
           ],
         ));
-  }
-
-  Color _setBackgroundColor() {
-    if (isAboutIsClicked) {
-      return Colors.deepPurple.shade300.withOpacity(.40);
-    }
-    return Colors.white;
   }
 
   Widget _buildAppBar() {
@@ -67,11 +58,7 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
       leading: Container(
         margin: const EdgeInsets.only(left: 20, top: 10),
         child: IconButton(
-          icon: isAboutIsClicked
-              ? const Icon(Icons.assignment_ind_outlined,
-                  color: Colors.red, size: 26)
-              : const Icon(Icons.assignment_ind_outlined,
-                  color: Colors.white, size: 26),
+          icon: Icon(Icons.menu_outlined, color: Colors.white, size: 26),
           onPressed: () {
             setState(() {
               isAboutIsClicked = !isAboutIsClicked;
@@ -81,45 +68,35 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
       ),
       title: Container(
         margin: const EdgeInsets.only(top: 18.0),
-        child: isAboutIsClicked
-            ? const Text(
-                "অ্যাপের তথ্য",
-                style: TextStyle(color: Colors.white, fontSize: 22),
-              )
-            : const Text(
-                "মেয়েদের নাম",
-                style: TextStyle(color: Colors.white, fontSize: 22),
-              ),
+        child: Text(
+          MyStrings.femaleName,
+          style: TextStyle(color: Colors.white, fontSize: 22),
+        ),
       ),
       actions: [
         Container(
           margin: const EdgeInsets.only(right: 20, top: 10),
-          child: isAboutIsClicked
-              ? null
-              : IconButton(
-                  onPressed: () {
-                    setState(() {
-                      updateListView();
-                      isFavoriteIsClicked = !isFavoriteIsClicked;
-                    });
-                  },
-                  icon: isFavoriteIsClicked
-                      ? const Icon(Icons.favorite, color: Colors.red, size: 26)
-                      : const Icon(Icons.favorite,
-                          color: Colors.white, size: 26),
-                ),
+          child: IconButton(
+            onPressed: () {
+              setState(() {
+                updateListView();
+                isFavoriteIsClicked = !isFavoriteIsClicked;
+              });
+            },
+            icon: isFavoriteIsClicked
+                ? const Icon(Icons.favorite, color: Colors.red, size: 26)
+                : const Icon(Icons.favorite, color: Colors.white, size: 26),
+          ),
         ),
       ],
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(20),
         child: Container(
           padding: const EdgeInsets.only(bottom: 25),
-          child: isAboutIsClicked
-              ? const Text("")
-              : Text(
-                  "মোট নাম: " + _totalNames.toString(),
-                  style: const TextStyle(color: Colors.grey, fontSize: 16),
-                ),
+          child: Text(
+            "মোট নাম: " + _totalNames.toString(),
+            style: const TextStyle(color: Colors.grey, fontSize: 16),
+          ),
         ),
       ),
       flexibleSpace: ClipPath(
@@ -158,7 +135,7 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
             borderRadius: BorderRadius.circular(20),
           ),
           prefixIcon: const Icon(Icons.search),
-          hintText: 'মেয়েদের নাম অনুসন্ধান করুন',
+          hintText: MyStrings.searchFemaleName,
         ),
       ),
     );
@@ -186,7 +163,9 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
                         backgroundColor: Colors.white54,
                         child: Image.asset("assets/images/icon_girl.png"),
                       ),
-                      title: Text(nameItem.name.toString()+" -- "+nameItem.nameEn.toString()),
+                      title: Text(nameItem.name.toString() +
+                          " -- " +
+                          nameItem.nameEn.toString()),
                     );
                   },
                   body: Container(
@@ -232,12 +211,12 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
     } else if (_femaleNameDisplay.isEmpty) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Icon(Icons.sentiment_dissatisfied_outlined,
               size: 40, color: Colors.grey),
           SizedBox(height: 20),
           Text(
-            "কোন নাম পাওয়া যায়নি",
+            MyStrings.noNameFound,
             style: TextStyle(
                 color: Colors.grey, fontSize: 20, fontWeight: FontWeight.bold),
           ),

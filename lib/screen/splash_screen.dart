@@ -1,5 +1,6 @@
 import 'package:children_name/resource/MyStrings.dart';
 import 'package:children_name/screen/home_screen.dart';
+import 'package:children_name/screen/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(Duration(seconds: 5)).then((value) =>
     {
       Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(builder: (context) => const HomeScreen()))
+          CupertinoPageRoute(builder: (context) => const MainScreen()))
     });
   }
 
