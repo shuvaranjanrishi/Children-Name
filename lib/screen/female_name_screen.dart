@@ -2,6 +2,7 @@ import 'package:children_name/component/my_clipper.dart';
 import 'package:children_name/database/db_helper.dart';
 import 'package:children_name/model/name_model.dart';
 import 'package:children_name/resource/MyStrings.dart';
+import 'package:children_name/navigation/nav_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,6 +17,7 @@ class FemaleNameScreen extends StatefulWidget {
 
 class _FemaleNameScreenState extends State<FemaleNameScreen> {
   final DBHelper _dbHelper = DBHelper.instance;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<NameModel> _femaleNames = [];
   List<NameModel> _femaleNameDisplay = [];
@@ -36,6 +38,8 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: SideMenu(),
+        key: _scaffoldKey,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: _buildAppBar(),
@@ -62,6 +66,7 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
           onPressed: () {
             setState(() {
               isAboutIsClicked = !isAboutIsClicked;
+              _scaffoldKey.currentState!.openDrawer();
             });
           },
         ),

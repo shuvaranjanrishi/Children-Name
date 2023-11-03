@@ -1,23 +1,16 @@
 import 'package:children_name/component/my_clipper.dart';
-import 'package:children_name/database/db_helper.dart';
-import 'package:children_name/model/name_model.dart';
 import 'package:children_name/navigation/nav_drawer.dart';
 import 'package:children_name/resource/MyStrings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sqflite/sqflite.dart';
 
-import 'about_screen.dart';
-
-class RashiScreen extends StatefulWidget {
-  const RashiScreen({Key? key}) : super(key: key);
+class RatingScreen extends StatefulWidget {
+  const RatingScreen({Key? key}) : super(key: key);
 
   @override
-  _RashiScreenState createState() => _RashiScreenState();
+  State<RatingScreen> createState() => _RatingScreenState();
 }
 
-class _RashiScreenState extends State<RashiScreen> {
+class _RatingScreenState extends State<RatingScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   bool isFavoriteIsClicked = false;
@@ -44,7 +37,7 @@ class _RashiScreenState extends State<RashiScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              MyStrings.rashi,style: TextStyle(fontSize: 40),
+              MyStrings.rating,style: TextStyle(fontSize: 40),
             ),
           ],
         ),
@@ -72,7 +65,7 @@ class _RashiScreenState extends State<RashiScreen> {
       title: Container(
         margin: const EdgeInsets.only(top: 18.0),
         child: Text(
-          MyStrings.rashi,
+          MyStrings.rating,
           style: TextStyle(color: Colors.white, fontSize: 22),
         ),
       ),

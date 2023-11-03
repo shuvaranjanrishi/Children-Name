@@ -4,6 +4,7 @@ import 'package:children_name/component/my_clipper.dart';
 import 'package:children_name/database/db_helper.dart';
 import 'package:children_name/model/name_model.dart';
 import 'package:children_name/resource/MyStrings.dart';
+import 'package:children_name/navigation/nav_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,7 +19,7 @@ class MaleNameScreen extends StatefulWidget {
 
 class _MaleNameScreenState extends State<MaleNameScreen> {
   final DBHelper _dbHelper = DBHelper.instance;
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<NameModel> _maleNames = [];
   List<NameModel> _maleNameDisplay = [];
 
@@ -38,6 +39,8 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: SideMenu(),
+      key: _scaffoldKey,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100),
         child: _buildAppBar(),
@@ -65,6 +68,7 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
           onPressed: () {
             setState(() {
               isAboutIsClicked = !isAboutIsClicked;
+              _scaffoldKey.currentState!.openDrawer();
             });
           },
         ),
@@ -115,83 +119,6 @@ class _MaleNameScreenState extends State<MaleNameScreen> {
       ),
     );
   }
-
-  // Widget _buildAppBar() {
-  //   return AppBar(
-  //     centerTitle: true,
-  //     backgroundColor: Colors.transparent,
-  //     elevation: 0,
-  //     leading: Container(
-  //       margin: const EdgeInsets.only(left: 20, top: 10),
-  //       child: IconButton(
-  //         icon: isAboutIsClicked
-  //             ? const Icon(Icons.assignment_ind_outlined,
-  //                 color: Colors.red, size: 26)
-  //             : const Icon(Icons.assignment_ind_outlined,
-  //                 color: Colors.white, size: 26),
-  //         onPressed: () {
-  //           setState(() {
-  //             isAboutIsClicked = !isAboutIsClicked;
-  //           });
-  //         },
-  //       ),
-  //     ),
-  //     title: Container(
-  //       margin: const EdgeInsets.only(top: 18.0),
-  //       child: isAboutIsClicked
-  //           ? Text(
-  //               MyStrings.appInfo,
-  //               style: TextStyle(color: Colors.white, fontSize: 22),
-  //             )
-  //           : Text(
-  //               MyStrings.maleName,
-  //               style: TextStyle(color: Colors.white, fontSize: 22),
-  //             ),
-  //     ),
-  //     actions: [
-  //       Container(
-  //         margin: const EdgeInsets.only(right: 20, top: 10),
-  //         child: isAboutIsClicked
-  //             ? null
-  //             : IconButton(
-  //                 onPressed: () {
-  //                   setState(() {
-  //                     updateListView();
-  //                     isFavoriteIsClicked = !isFavoriteIsClicked;
-  //                   });
-  //                 },
-  //                 icon: isFavoriteIsClicked
-  //                     ? const Icon(Icons.favorite, color: Colors.red, size: 26)
-  //                     : const Icon(Icons.favorite,
-  //                         color: Colors.white, size: 26),
-  //               ),
-  //       ),
-  //     ],
-  //     bottom: PreferredSize(
-  //       preferredSize: const Size.fromHeight(20),
-  //       child: Container(
-  //         padding: const EdgeInsets.only(bottom: 25),
-  //         child: isAboutIsClicked
-  //             ? const Text("")
-  //             : Text(
-  //                 "মোট নাম: " + _totalNames.toString(),
-  //                 style: const TextStyle(color: Colors.grey, fontSize: 16),
-  //               ),
-  //       ),
-  //     ),
-  //     flexibleSpace: ClipPath(
-  //       clipper: MyDownClipper(),
-  //       child: Container(
-  //         decoration: const BoxDecoration(
-  //             gradient: LinearGradient(
-  //                 colors: [Colors.deepPurple, Color(0xff7D3C98)],
-  //                 begin: Alignment.topCenter,
-  //                 end: Alignment.bottomCenter,
-  //                 tileMode: TileMode.clamp)),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _buildSearchBar() {
     return Padding(

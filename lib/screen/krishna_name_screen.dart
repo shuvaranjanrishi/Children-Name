@@ -1,13 +1,12 @@
 import 'package:children_name/component/my_clipper.dart';
 import 'package:children_name/database/db_helper.dart';
 import 'package:children_name/model/name_model.dart';
+import 'package:children_name/navigation/nav_drawer.dart';
 import 'package:children_name/resource/MyStrings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sqflite/sqflite.dart';
-
-import 'about_screen.dart';
 
 class KrishnaNameScreen extends StatefulWidget {
   const KrishnaNameScreen({Key? key}) : super(key: key);
@@ -18,6 +17,7 @@ class KrishnaNameScreen extends StatefulWidget {
 
 class _KrishnaNameScreenState extends State<KrishnaNameScreen> {
   final DBHelper _dbHelper = DBHelper.instance;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<NameModel> _femaleNames = [];
   List<NameModel> _femaleNameDisplay = [];
@@ -38,26 +38,20 @@ class _KrishnaNameScreenState extends State<KrishnaNameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: _setBackgroundColor(),
+        drawer: SideMenu(),
+        key: _scaffoldKey,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: _buildAppBar(),
         ),
         body: Column(
           children: <Widget>[
-            if (!isAboutIsClicked) _buildSearchBar(),
+            _buildSearchBar(),
             Expanded(
-              child: isAboutIsClicked ? const AboutScreen() : _buildListView(),
+              child: _buildListView(),
             )
           ],
         ));
-  }
-
-  Color _setBackgroundColor() {
-    if (isAboutIsClicked) {
-      return Colors.deepPurple.shade300.withOpacity(.40);
-    }
-    return Colors.white;
   }
 
   Widget _buildAppBar() {
@@ -68,59 +62,46 @@ class _KrishnaNameScreenState extends State<KrishnaNameScreen> {
       leading: Container(
         margin: const EdgeInsets.only(left: 20, top: 10),
         child: IconButton(
-          icon: isAboutIsClicked
-              ? const Icon(Icons.assignment_ind_outlined,
-                  color: Colors.red, size: 26)
-              : const Icon(Icons.assignment_ind_outlined,
-                  color: Colors.white, size: 26),
+          icon: Icon(Icons.menu_outlined, color: Colors.white, size: 26),
           onPressed: () {
             setState(() {
               isAboutIsClicked = !isAboutIsClicked;
+              _scaffoldKey.currentState!.openDrawer();
             });
           },
         ),
       ),
       title: Container(
         margin: const EdgeInsets.only(top: 18.0),
-        child: isAboutIsClicked
-            ? const Text(
-                "অ্যাপের তথ্য",
-                style: TextStyle(color: Colors.white, fontSize: 22),
-              )
-            : const Text(
-                "মেয়েদের নাম",
-                style: TextStyle(color: Colors.white, fontSize: 22),
-              ),
+        child: Text(
+          MyStrings.krishnaName,
+          style: TextStyle(color: Colors.white, fontSize: 22),
+        ),
       ),
       actions: [
         Container(
           margin: const EdgeInsets.only(right: 20, top: 10),
-          child: isAboutIsClicked
-              ? null
-              : IconButton(
-                  onPressed: () {
-                    setState(() {
-                      updateListView();
-                      isFavoriteIsClicked = !isFavoriteIsClicked;
-                    });
-                  },
-                  icon: isFavoriteIsClicked
-                      ? const Icon(Icons.favorite, color: Colors.red, size: 26)
-                      : const Icon(Icons.favorite,
-                          color: Colors.white, size: 26),
-                ),
+          child: IconButton(
+            onPressed: () {
+              setState(() {
+                updateListView();
+                isFavoriteIsClicked = !isFavoriteIsClicked;
+              });
+            },
+            icon: isFavoriteIsClicked
+                ? const Icon(Icons.favorite, color: Colors.red, size: 26)
+                : const Icon(Icons.favorite, color: Colors.white, size: 26),
+          ),
         ),
       ],
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(20),
         child: Container(
           padding: const EdgeInsets.only(bottom: 25),
-          child: isAboutIsClicked
-              ? const Text("")
-              : Text(
-                  "মোট নাম: " + _totalNames.toString(),
-                  style: const TextStyle(color: Colors.grey, fontSize: 16),
-                ),
+          child: Text(
+            "মোট নাম: " + _totalNames.toString(),
+            style: const TextStyle(color: Colors.grey, fontSize: 16),
+          ),
         ),
       ),
       flexibleSpace: ClipPath(
@@ -214,9 +195,9 @@ class _KrishnaNameScreenState extends State<KrishnaNameScreen> {
                         },
                         icon: nameItem.isFavorite == true
                             ? const Icon(Icons.favorite,
-                                color: Colors.red, size: 26)
+                            color: Colors.red, size: 26)
                             : const Icon(Icons.favorite_border_outlined,
-                                color: Colors.black38, size: 26),
+                            color: Colors.black38, size: 26),
                       ),
                     ),
                   ),
@@ -270,7 +251,7 @@ class _KrishnaNameScreenState extends State<KrishnaNameScreen> {
       dbFuture.then((database) {
         if (isFavoriteIsClicked) {
           Future<List<NameModel>> nameListFuture =
-              _dbHelper.getFavFemaleNameList();
+          _dbHelper.getFavFemaleNameList();
           nameListFuture.then((newNameList) {
             setState(() {
               _femaleNames = newNameList;
@@ -281,7 +262,7 @@ class _KrishnaNameScreenState extends State<KrishnaNameScreen> {
           });
         } else {
           Future<List<NameModel>> nameListFuture =
-              _dbHelper.getFemaleNameList();
+          _dbHelper.getFemaleNameList();
           nameListFuture.then((newNameList) {
             setState(() {
               _femaleNames = newNameList;

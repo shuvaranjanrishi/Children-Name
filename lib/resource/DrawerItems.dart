@@ -1,8 +1,8 @@
 import 'package:children_name/resource/MyStrings.dart';
 import 'package:children_name/screen/about_screen.dart';
-import 'package:children_name/screen/female.dart';
-import 'package:children_name/screen/home_screen.dart';
+import 'package:children_name/screen/female_name_screen.dart';
 import 'package:children_name/screen/krishna_name_screen.dart';
+import 'package:children_name/screen/male_name_screen.dart';
 import 'package:children_name/screen/rashi_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -26,11 +26,10 @@ class DrawerItems {
   ];
 
   static final List<Widget> drawerPages = [
-    const HomeScreen(),
+    const FemaleNameScreen(),
+    const MaleNameScreen(),
     const KrishnaNameScreen(),
     const RashiScreen(),
-    const FemaleNameScreen(),
-    const FemaleNameScreen(),
     const AboutScreen()
   ];
 }
