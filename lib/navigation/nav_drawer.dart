@@ -3,13 +3,13 @@ import 'package:children_name/resource/MyStrings.dart';
 import 'package:children_name/navigation/nav_bottom.dart';
 import 'package:flutter/material.dart';
 
-class SideMenu extends StatefulWidget {
+class NavDrawer extends StatefulWidget {
 
   @override
-  State<SideMenu> createState() => _SideMenuState();
+  State<NavDrawer> createState() => _NavDrawerState();
 }
 
-class _SideMenuState extends State<SideMenu> {
+class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(

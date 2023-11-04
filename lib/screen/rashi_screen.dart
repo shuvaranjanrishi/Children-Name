@@ -34,7 +34,7 @@ class _RashiScreenState extends State<RashiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: SideMenu(),
+      drawer: NavDrawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100),
         child: _buildAppBar(),

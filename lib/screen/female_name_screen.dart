@@ -38,7 +38,7 @@ class _FemaleNameScreenState extends State<FemaleNameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: SideMenu(),
+        drawer: NavDrawer(),
         key: _scaffoldKey,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),

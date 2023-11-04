@@ -27,7 +27,7 @@ class _RatingScreenState extends State<RatingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: SideMenu(),
+      drawer: NavDrawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100),
         child: _buildAppBar(),

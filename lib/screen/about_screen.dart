@@ -24,7 +24,7 @@ class _AboutScreenState extends State<AboutScreen> {
 
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],
-        drawer: SideMenu(),
+        drawer: NavDrawer(),
         key: _scaffoldKey,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
