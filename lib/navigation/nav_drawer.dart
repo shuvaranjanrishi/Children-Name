@@ -1,3 +1,4 @@
+import 'package:children_name/resource/DrawerItems.dart';
 import 'package:children_name/resource/MyStrings.dart';
 import 'package:children_name/navigation/nav_bottom.dart';
 import 'package:flutter/material.dart';
@@ -15,64 +16,34 @@ class _SideMenuState extends State<SideMenu> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-            child: Text(MyStrings.appName, style: TextStyle(color: Colors.white, fontSize: 25)),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(1.0),
-                  bottomRight: Radius.circular(1.0),
-                ),
-                color: Colors.white,
-                image: DecorationImage(
-                    fit: BoxFit.fill, image: AssetImage("assets/images/logo2.png")
-                )
+          UserAccountsDrawerHeader(
+            accountName: Text(MyStrings.appName),
+            accountEmail: Text(MyStrings.developerName),
+            currentAccountPicture: CircleAvatar(
+              child: ClipOval(child: Image.asset("assets/images/logo2.png")),
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.home_filled),
-            title: Text(MyStrings.home),
-            onTap: () => {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavBottom(selectedIndex:0)))
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.list_outlined),
-            title: Text(MyStrings.krishnaName),
-            onTap: () => {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavBottom(selectedIndex:2)))
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.ac_unit_outlined),
-            title: Text(MyStrings.rashi),
-            onTap: () => {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavBottom(selectedIndex:3)))
-            },
-          ),
+          _generateMenu(DrawerItems.drawerItemIcons[0], DrawerItems.drawerItemNames[0], 0),
+          _generateMenu(DrawerItems.drawerItemIcons[1], DrawerItems.drawerItemNames[1], 2),
+          _generateMenu(DrawerItems.drawerItemIcons[2], DrawerItems.drawerItemNames[2], 3),
           Divider(),
-          ListTile(
-            leading: Icon(Icons.send_outlined),
-            title: Text(MyStrings.feedback),
-            onTap: () => {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavBottom(selectedIndex:4)))
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.rate_review_outlined),
-            title: Text(MyStrings.rating),
-            onTap: () => {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavBottom(selectedIndex:5)))
-            },
-          ) ,
-          ListTile(
-            leading: Icon(Icons.person_pin_outlined),
-            title: Text(MyStrings.appInfo),
-            onTap: () => {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavBottom(selectedIndex:6)))
-            },
-          )
+          _generateMenu(DrawerItems.drawerItemIcons[3], DrawerItems.drawerItemNames[3], 4),
+          _generateMenu(DrawerItems.drawerItemIcons[4], DrawerItems.drawerItemNames[4], 5),
+          _generateMenu(DrawerItems.drawerItemIcons[5], DrawerItems.drawerItemNames[5], 6),
         ],
       ),
     );
   }
+
+  Widget _generateMenu(IconData icon, String name, int index) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(name),
+      onTap: () => {
+        Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) => NavBottom(selectedIndex: index)))
+      },
+    );
+  }
 }
+//74
