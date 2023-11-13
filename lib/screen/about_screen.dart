@@ -43,16 +43,6 @@ class _AboutScreenState extends State<AboutScreen> {
             ),
             child: Stack(
               children: <Widget>[
-                // Positioned(
-                //   child: Image(
-                //     alignment: Alignment.topCenter,
-                //     image:
-                //         const AssetImage("assets/images/background_about2.jpg"),
-                //     width: sWidth,
-                //     height: sHeight,
-                //     fit: BoxFit.fill
-                //   ),
-                // ),
                 Column(
                   children: [
                     Padding(

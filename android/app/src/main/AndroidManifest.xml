@@ -3,7 +3,13 @@
     package="com.therishideveloper.children_name">
 
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
-    
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SENDTO"/>
+            <data android:scheme="mailto"/>
+        </intent>
+    </queries>
    <application
         android:label="শিশুদের সুন্দর নাম"
         android:icon="@mipmap/app_logo">

@@ -27,6 +27,8 @@ class MyStrings {
   static String developerContact =
       "Email: sr.rishi.nameapp2022@gmail.com\nFB: shuvaranjanrishi/facebook.com";
 
+  static String developerEmail = "sr.rishi.nameapp2022@gmail.com";
+
   static String maleName = "ছেলেদের নাম";
   static String femaleName = "মেয়েদের নাম";
   static String searchMaleName = "ছেলেদের নাম অনুসন্ধান করুন";
@@ -40,4 +42,33 @@ class MyStrings {
   static String feedback = "আপনার পরামর্শ পাঠান";
   static String rating = "রেটিং দিন";
   static String appInfo = "অ্যাপের তথ্য";
+
+  //rashi_screen
+  static String rashi_nirnoy = "নামের আদ্যক্ষর অনুসারে রাশি নির্ণয়";
+  static String rashi_1 = "কন্যা";
+  static String rashi_2 = "কর্কট";
+  static String rashi_3 = "কুম্ভ";
+  static String rashi_4 = "তুলা";
+  static String rashi_5 = "ধনু";
+  static String rashi_6 = "বৃশ্চিক";
+  static String rashi_7 = "বৃষ";
+  static String rashi_8 = "মকর";
+  static String rashi_9 = "মিথুন";
+  static String rashi_10 = "মীন";
+  static String rashi_11 = "মেষ";
+  static String rashi_12 = "সিংহ";
+
+  static String letters_1 = "প, ঠ, ষ, ণ";
+  static String letters_2 = "ড, হ";
+  static String letters_3 = "গ, ‍স, শ";
+  static String letters_4 = "ত, র";
+  static String letters_5 = "ধ, ফ, ভ, ড়, ঢ়";
+  static String letters_6 = "ন, য";
+  static String letters_7 = "ই, উ, এ, ও, ব";
+  static String letters_8 = "খ, জ";
+  static String letters_9 = "ক, ঘ, ঙ, ছ";
+  static String letters_10 = "থ, ঞ, প, দ, চ";
+  static String letters_11 = "অ, ল";
+  static String letters_12 = "ম, ট";
+
 }

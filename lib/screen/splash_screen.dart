@@ -66,10 +66,6 @@ class _SplashScreenState extends State<SplashScreen>
                       ),
                     ),
                   ),
-                  // Image(
-                  //   image: AssetImage("assets/images/splash_logo.png"),
-                  //   width: 150,
-                  // ),
                   SizedBox(
                     height: 20,
                   ),
@@ -83,10 +79,6 @@ class _SplashScreenState extends State<SplashScreen>
                         ..color = Colors.blue[100]!,
                     ),
                   ),
-                  // SizedBox(
-                  //   height: 50,
-                  // ),
-                  // SpinKitDoubleBounce(color: Colors.orange, size: 50)
                 ],
               ))
         ],

@@ -1,10 +1,14 @@
 import 'package:children_name/component/my_clipper.dart';
 import 'package:children_name/navigation/nav_drawer.dart';
 import 'package:children_name/resource/MyStrings.dart';
+import 'package:children_name/screen/button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:launch_review/launch_review.dart';
+import 'package:rate_my_app/rate_my_app.dart';
 
 class RatingScreen extends StatefulWidget {
-  const RatingScreen({Key? key}) : super(key: key);
+  final RateMyApp rateMyApp;
+  const RatingScreen({Key? key,   required this.rateMyApp}) : super(key: key);
 
   @override
   State<RatingScreen> createState() => _RatingScreenState();
@@ -32,18 +36,43 @@ class _RatingScreenState extends State<RatingScreen> {
         preferredSize: const Size.fromHeight(100),
         child: _buildAppBar(),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              MyStrings.rating,style: TextStyle(fontSize: 40),
-            ),
-          ],
-        ),
+      body:  Center(
+        child: buildOkButton(4),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  List<Widget> actionsBuilder(BuildContext context, double? stars) =>
+      stars == null
+          ? [buildCancelButton()]
+          : [buildOkButton(stars), buildCancelButton()];
+
+  Widget buildOkButton(double stars) => TextButton(
+    child: Text('OK'),
+    onPressed: () async {
+      widget.rateMyApp.launchStore();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Thanks for your feedback!')),
+      );
+
+      final launchAppStore = stars >= 4;
+
+      final event = RateMyAppEventType.rateButtonPressed;
+
+      await widget.rateMyApp.callEvent(event);
+
+      if (launchAppStore) {
+        widget.rateMyApp.launchStore();
+      }
+
+      Navigator.of(context).pop();
+    },
+  );
+
+  Widget buildCancelButton() => RateMyAppNoButton(
+    widget.rateMyApp,
+    text: 'CANCEL',
+  );
 
   Widget _buildAppBar() {
     return AppBar(
