@@ -82,6 +82,9 @@ flutter:
     - assets/images/background_splash.jpg
     - assets/images/icon_boy.png
     - assets/images/icon_girl.png
+    - assets/images/step_1.png
+    - assets/images/step_2.png
+    - assets/images/step_3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

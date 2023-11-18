@@ -3,10 +3,10 @@ import 'package:children_name/screen/about_screen.dart';
 import 'package:children_name/screen/female_name_screen.dart';
 import 'package:children_name/screen/krishna_name_screen.dart';
 import 'package:children_name/screen/male_name_screen.dart';
-import 'package:children_name/screen/rate_app_init_widget.dart';
 import 'package:children_name/screen/rating_screen.dart';
 import 'package:children_name/screen/rashi_screen.dart';
 import 'package:children_name/screen/suggetion_screen.dart';
+import 'package:children_name/widget/rate_app_init_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 

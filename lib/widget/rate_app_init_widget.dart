@@ -17,7 +17,7 @@ class _RateAppInitWidgetState extends State<RateAppInitWidget> {
   RateMyApp? rateMyApp;
 
   static const playStoreId = 'com.therishideveloper.children_name';
-  // static const appstoreId = 'com.apple.mobilesafari';
+  static const appstoreId = 'com.apple.mobilesafari';
 
   @override
   Widget build(BuildContext context) => RateMyAppBuilder(

@@ -71,4 +71,10 @@ class MyStrings {
   static String letters_11 = "অ, ল";
   static String letters_12 = "ম, ট";
 
+  static String rating_inspire = "প্লে স্টোরে রিভিউ দিয়ে উৎসাহিত করুন";
+  static String how_to_rate = "* যেভাবে রেটিং ও রিভিউ দিবেন";
+  static String step_1 = "ধাপ ১: প্রথমে ৫ ষ্টার সিলেক্ট করুন";
+  static String step_2 = "ধাপ ২: আপনার মতামত লিখুন";
+  static String step_3 = "ধাপ ৩: POST এ ক্লিক করুন";
+
 }
