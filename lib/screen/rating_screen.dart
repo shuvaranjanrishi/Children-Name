@@ -47,6 +47,7 @@ class _RatingScreenState extends State<RatingScreen> {
                     ),
                   ),
                   child: Container(
+                    alignment: Alignment.center,
                     color: Colors.white,
                     padding: EdgeInsets.all(5),
                     child: Text(
