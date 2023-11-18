@@ -13,6 +13,7 @@ class DrawerItems {
     MyStrings.rashi,
     MyStrings.feedback,
     MyStrings.rating,
+    MyStrings.share,
     MyStrings.appInfo
   ];
 
@@ -22,6 +23,7 @@ class DrawerItems {
     Icons.ac_unit_outlined,
     Icons.send_outlined,
     Icons.reviews_outlined,
+    Icons.share_outlined,
     Icons.account_box_outlined
   ];
 

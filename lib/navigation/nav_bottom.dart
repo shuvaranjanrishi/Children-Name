@@ -5,6 +5,7 @@ import 'package:children_name/screen/krishna_name_screen.dart';
 import 'package:children_name/screen/male_name_screen.dart';
 import 'package:children_name/screen/rating_screen.dart';
 import 'package:children_name/screen/rashi_screen.dart';
+import 'package:children_name/screen/share_screen.dart';
 import 'package:children_name/screen/suggetion_screen.dart';
 import 'package:children_name/widget/rate_app_init_widget.dart';
 import 'package:flutter/material.dart';
@@ -134,6 +135,8 @@ class _NavBottomState extends State<NavBottom> {
         builder: (rateMyApp) => RatingScreen(rateMyApp: rateMyApp),
       );
     } else if (currentIndex == 6) {
+      currentScreen = ShareScreen();
+    }else if (currentIndex == 7) {
       currentScreen = AboutScreen();
     }
     return currentScreen;
