@@ -71,6 +71,8 @@ class MyStrings {
   static String letters_11 = "অ, ল";
   static String letters_12 = "ম, ট";
 
+  static String krishna_name = "শ্রী শ্রী কৃষ্ণের অষ্টোত্তর শতনাম";
+
   static String rating_inspire = "প্লে স্টোরে রিভিউ দিয়ে উৎসাহিত করুন";
   static String how_to_rate = "* যেভাবে রেটিং ও রিভিউ দিবেন";
   static String step_1 = "ধাপ ১: প্রথমে ৫ ষ্টার সিলেক্ট করুন";

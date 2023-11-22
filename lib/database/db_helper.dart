@@ -1,16 +1,20 @@
 import 'dart:io';
+
 import 'package:children_name/model/name_model.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
   static const dbName = "children_name_db.db";
   static const dbVersion = 1;
   static const maleNameTable = "male_name";
   static const femaleNameTable = "female_name";
+  static const krishnaNameTable = "krishna_name";
   static const colId = "id";
   static const colName = "name";
   static const colNameEn = "name_en";
@@ -33,25 +37,66 @@ class DBHelper {
     //check existing
     var exists = await databaseExists(path);
 
-    if (!exists) {
-      //if not exists
-      debugPrint("Start copy database from assets");
-      try {
-        await Directory(dirname(path)).create(recursive: true);
-      } catch (_) {}
+    // PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    //
+    // String appName = packageInfo.appName;
+    // String packageName = packageInfo.packageName;
+    // String version = packageInfo.version;
+    // String buildNumber = packageInfo.buildNumber;
+    // debugPrint("Current Version: " + version);
 
-      //copy
-      ByteData data = await rootBundle.load(join("assets/csv_data", dbName));
-      List<int> bytes =
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    // var val = getStringValuesSF();
+    // if (val.toString().isEmpty) {
+    //   debugPrint("new_version_stored: " + val.toString());
+    //   addStringToSF(version);
+    // }
+    // if (val.toString().isNotEmpty) {
+      if (!exists) {
+        //if not exists
+        debugPrint("Start copy database from assets");
+        try {
+          await Directory(dirname(path)).create(recursive: true);
+        } catch (_) {}
 
-      //write
-      await File(path).writeAsBytes(bytes, flush: true);
-    } else {
-      debugPrint("Opening existing database");
-    }
+        //copy
+        ByteData data = await rootBundle.load(join("assets/csv_data", dbName));
+        List<int> bytes =
+            data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+
+        //write
+        await File(path).writeAsBytes(bytes, flush: true);
+      } else {
+        debugPrint("Opening existing database");
+      }
+    // }
 
     return await openDatabase(path, version: dbVersion);
+  }
+
+  // void addStringToSF(String version) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setString('version', version);
+  // }
+  //
+  // Future<String?> getStringValuesSF() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? stringValue = prefs.getString('version');
+  //   return stringValue;
+  // }
+
+  //=========================
+  //Read Krishna Names
+  //=========================
+  //get the Map list and convert it to Note List
+  Future<List<NameModel>> getKrishnaNameList() async {
+    Database? db = await instance.database;
+    var noteMapList = await db.query(krishnaNameTable);
+
+    List<NameModel> noteList = [];
+    for (int i = 0; i < noteMapList.length; i++) {
+      noteList.add(NameModel.fromMap(noteMapList[i]));
+    }
+    return noteList;
   }
 
   //=========================
