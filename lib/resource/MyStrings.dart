@@ -26,7 +26,8 @@ class MyStrings {
   static String developerContact =
       "Email: sr.rishi.nameapp2022@gmail.com\nFB: shuvaranjanrishi/facebook.com";
   static String developerEmail = "sr.rishi.nameapp2022@gmail.com";
-  static String playStoreLink = "https://play.google.com/store/apps/details?id=com.therishideveloper.children_name";
+  static String playStoreLink =
+      "https://play.google.com/store/apps/details?id=com.therishideveloper.children_name";
 
   static String maleName = "ছেলেদের নাম";
   static String femaleName = "মেয়েদের নাম";
@@ -78,7 +79,7 @@ class MyStrings {
   static String step_1 = "ধাপ ১: প্রথমে ৫ ষ্টার সিলেক্ট করুন";
   static String step_2 = "ধাপ ২: আপনার মতামত লিখুন";
   static String step_3 = "ধাপ ৩: Post এ ক্লিক করুন";
+
   //share
   static String share_fav = "প্রিয়জনদের সাথে অ্যাপটি শেয়ার করুন";
-
 }

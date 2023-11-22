@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:children_name/model/name_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
@@ -51,23 +49,23 @@ class DBHelper {
     //   addStringToSF(version);
     // }
     // if (val.toString().isNotEmpty) {
-      if (!exists) {
-        //if not exists
-        debugPrint("Start copy database from assets");
-        try {
-          await Directory(dirname(path)).create(recursive: true);
-        } catch (_) {}
+    if (!exists) {
+      //if not exists
+      debugPrint("Start copy database from assets");
+      try {
+        await Directory(dirname(path)).create(recursive: true);
+      } catch (_) {}
 
-        //copy
-        ByteData data = await rootBundle.load(join("assets/csv_data", dbName));
-        List<int> bytes =
-            data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      //copy
+      ByteData data = await rootBundle.load(join("assets/csv_data", dbName));
+      List<int> bytes =
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
-        //write
-        await File(path).writeAsBytes(bytes, flush: true);
-      } else {
-        debugPrint("Opening existing database");
-      }
+      //write
+      await File(path).writeAsBytes(bytes, flush: true);
+    } else {
+      debugPrint("Opening existing database");
+    }
     // }
 
     return await openDatabase(path, version: dbVersion);

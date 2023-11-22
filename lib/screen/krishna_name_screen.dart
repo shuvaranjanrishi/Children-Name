@@ -74,19 +74,16 @@ class _KrishnaNameScreenState extends State<KrishnaNameScreen> {
                 itemCount: _krishnaNames.length,
                 itemBuilder: (context, index) {
                   var nameItem = _krishnaNames[index];
-                  return Column(
-                      children: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                nameItem.name.toString(),
-                                style: TextStyle(fontSize: 18),
-                                textAlign: TextAlign.center,
-                              ),
-                            ]),
-                        Divider()
-                      ]);
+                  return Column(children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text(
+                        nameItem.name.toString(),
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
+                    Divider()
+                  ]);
                 },
               ),
             ))
