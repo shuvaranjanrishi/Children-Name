@@ -9,7 +9,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
   static const dbName = "children_name_db.db";
-  static const dbVersion = 1;
+  static const dbVersion = 7;
   static const maleNameTable = "male_name";
   static const femaleNameTable = "female_name";
   static const krishnaNameTable = "krishna_name";

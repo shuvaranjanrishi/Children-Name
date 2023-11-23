@@ -13,7 +13,7 @@ class DrawerItems {
     MyStrings.rashi,
     MyStrings.feedback,
     MyStrings.rating,
-    MyStrings.share,
+    MyStrings.appShare,
     MyStrings.appInfo
   ];
 

@@ -148,7 +148,7 @@ class _ShareScreenState extends State<ShareScreen> {
       title: Container(
         margin: const EdgeInsets.only(top: 18.0),
         child: Text(
-          MyStrings.share,
+          MyStrings.appShare,
           style: TextStyle(color: Colors.white, fontSize: 22),
         ),
       ),
